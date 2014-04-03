@@ -162,11 +162,15 @@ if (index < lineData.length){
 console.log(svg.select('.tick_curr_temp[index="'+index+ '"]').length)
 	svg.select('.tick_curr_temp[index="'+index+ '"]')
 				.transition()
-				.delay(500)
-				.duration(2000)
+
+				.duration(function(){
+					return index * 20;
+				}).ease("elastic")
 				.attr('x2' , lineData[index]["x2"])
 				.attr('y2' , lineData[index]["y2"])
-				.each("end",mycallback(index+1));
+				.each("start",function(){
+					mycallback(index+1);
+				});
 	}
 }
 
