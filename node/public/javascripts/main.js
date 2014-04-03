@@ -21,7 +21,7 @@ lineData = [];
 		if (angle > (1.07 + twoPi)){
 			angle = (1.07 + twoPi);
 		}
-		console.log(angle-2)
+
 		var x1 =  180 * Math.cos(angle);
 		var y1 =  180 * Math.sin(angle);
 		var x2 = 220 * Math.cos(angle);
@@ -43,7 +43,7 @@ lineData = [];
 		if (angle > (1.07 + twoPi)){
 			angle = (1.07 + twoPi);
 		}
-		console.log(angle-2)
+
 		var x1 =  180 * Math.cos(angle);
 		var y1 =  180 * Math.sin(angle);
 		var x2 = 200 * Math.cos(angle);
@@ -72,8 +72,6 @@ svg.selectAll('.foreground').data(lineData)
 
 function init(){
 	Temperature = 85; 
-
-	console.log("init running");
 	width = 960;
     height = 500;
 
@@ -113,11 +111,12 @@ createLineData();
 drawLine();
 svg.append('text')
 		.text(Temperature)
+		.attr('text-anchor', 'middle')
 		.attr("font-family", "sans-serif")
         .attr("font-size", "100px")
         .attr("fill", "white")
-        .attr("x", '-45')
-        .attr("y", '20')
+        .attr("y", '30')
+        .attr("x","4")
 
 drawBubbles();
 }
@@ -135,6 +134,7 @@ function drawBubbles(){
 					  {"cx": 13, "cy": 163, "r":5} ]
 	
 	svg.selectAll('.bubble').data(bubble_data).enter().append('circle')
+
 												.attr("class", "bubble")
 												.attr("cx",function(d){
 																		return d.cx;
@@ -153,18 +153,37 @@ function drawBubbles(){
 
 }
 
+function mycallback(index){
+
+
+
+if (index < lineData.length){
+
+console.log(svg.select('.tick_curr_temp[index="'+index+ '"]').length)
+	svg.select('.tick_curr_temp[index="'+index+ '"]')
+				.transition()
+				.delay(500)
+				.duration(2000)
+				.attr('x2' , lineData[index]["x2"])
+				.attr('y2' , lineData[index]["y2"])
+				.each("end",mycallback(index+1));
+	}
+}
 
 function drawLine(){
 
-svg.selectAll('.foreground').data(lineData)
+svg.selectAll('.foreground').data(lineData, function(d){return  "" + d.x1 + '_' + d.x2;;})
 				.enter()
 				.append('line')
+
 				.attr("class","tick_curr_temp")
+				.attr('index', function(d,i){return i;})
 				.attr('x1' , function(d){return d.x1;})
 				.attr('y1' , function(d){return d.y1;})
-				.attr('x2' , function(d){return d.x2;})
-				.attr('y2' , function(d){return d.y2;});
-				
+				.attr('x2' , function(d){return d.x1;})
+				.attr('y2' , function(d){return d.y1;})
+
+mycallback(0);
 
 
 
