@@ -164,7 +164,7 @@ console.log(svg.select('.tick_curr_temp[index="'+index+ '"]').length)
 				.transition()
 
 				.duration(function(){
-					return index * 20;
+					return index*10 + 1000;
 				}).ease("elastic")
 				.attr('x2' , lineData[index]["x2"])
 				.attr('y2' , lineData[index]["y2"])
