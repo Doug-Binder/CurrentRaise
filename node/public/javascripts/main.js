@@ -24,8 +24,8 @@ lineData = [];
 
 		var x1 =  180 * Math.cos(angle);
 		var y1 =  180 * Math.sin(angle);
-		var x2 = 220 * Math.cos(angle);
-		var y2 = 220 * Math.sin(angle);
+		var x2 = 210 * Math.cos(angle);
+		var y2 = 210 * Math.sin(angle);
 
 	    lineData.push({'x1' :x1,  'y1': y1,'x2':x2, "y2" :  y2});
 
@@ -119,6 +119,11 @@ svg.append('text')
         .attr("x","4")
 
 drawBubbles();
+$(body).on("keypress", function(e){
+
+
+	
+})
 }
 
 
@@ -172,6 +177,9 @@ console.log(svg.select('.tick_curr_temp[index="'+index+ '"]').length)
 					mycallback(index+1);
 				});
 	}
+}
+
+function changetemp(){
 }
 
 function drawLine(){
