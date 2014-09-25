@@ -1,0 +1,33 @@
+body {
+ background-color:black;
+  padding: 50px;
+  color:white;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+svg{
+  background-color:black;
+}
+.chart rect {
+  fill: steelblue;
+}
+.chart line{
+  stroke: #2D2E2D;
+  height: 1px;
+}
+.chart text {
+  fill: white;
+  font: 12px sans-serif;
+  text-anchor: end;
+}
+.chart .graph-label{
+
+  font: 14px sans-serif;
+
+}
+.chart .funded-label{
+  text-anchor: start;
+}
+.background {
+fill:transparent;
+}
